@@ -45,13 +45,17 @@ class CNNOD(nn.Module):
 parse = argparse.ArgumentParser()
 parse.add_argument('--ligand', '-l', type=str, help='Ligand type, including DNA, RNA, and antibody',
                    default='DNA', choices=['DNA', 'RNA', 'AB'])
-parse.add_argument('--threshold', '-s', type=float, help='Threshold of classification score', default=0.5)
+parse.add_argument('--threshold', '-t', type=float, help='Threshold of classification score', default=0.5)
 parse.add_argument('--input', '-i', help='Input protein sequences in FASTA format', required=True)
 parse.add_argument('--output', '-o', help='Output file path, default clape_result.txt',
                    default='clape_result.txt')
 parse.add_argument('--cache', '-c', help='Path for saving cached pre-trained model', default='protbert')
 
 args = parse.parse_args()
+
+# parameter judge
+if args.threshold > 1 or args.threshold < 0:
+    raise ValueError("Threshold is out of range.")
 
 # input sequences
 input_file = open(args.input, 'r').readlines()
