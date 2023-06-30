@@ -24,3 +24,7 @@ Some parameters are described as follows:
 | --input     | The path of the input file in FASTA format.                  |
 | --output    | The path of the output file, the first and the second line are the same as the input file, and the third line is the prediction result. |
 | --cache     | The path for saving the pre-trained parameters, default: protbert. |
+
+Reference: 
+
+[Protein-DNA binding sites prediction based on pre-trained protein language model and contrastive learning](https://arxiv.org/abs/2306.15912] by Yufan Liufan and Boxue Tian. 
