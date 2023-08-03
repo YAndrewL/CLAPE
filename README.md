@@ -28,3 +28,4 @@ Some parameters are described as follows:
 Reference: 
 
 [Protein-DNA binding sites prediction based on pre-trained protein language model and contrastive learning](https://arxiv.org/abs/2306.15912) by Yufan Liu and Boxue Tian. 
+Please contact andyalbert97@gmail.com for questions. 
