@@ -107,6 +107,7 @@ print("Done!")
 # prediction process
 results = []
 print(f"=====Predicting {args.ligand}-binding sites=====")
+predictor.eval()
 for f in features:
     out = predictor(f).squeeze(0).detach().numpy()[:, 1]
     score = ''.join([str(1) if x > args.threshold else str(0) for x in out])
