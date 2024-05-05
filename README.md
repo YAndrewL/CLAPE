@@ -1,3 +1,6 @@
+**If you have any questions regarding the code/data, please contact Yufan Liu via andyalbert97@gmail.com. 
+**
+
 # Repo for CLAPE framework
 
 This repo holds the code of CLAPE (Contrastive Learning And Pre-trained Encoder) framework for protein-ligands binding sites prediction. We provide 3 ligand-binding tasks including protein-DNA, protein-RNA, and antibody-antigen binding sites prediction. 
@@ -31,5 +34,4 @@ Reference:
 
 Update: The training code is released with CLAPE-SMB, please check [the repo](https://github.com/JueWangTHU/CLAPE-SMB) for reference.
 
-Please contact andyalbert97@gmail.com for questions. 
 
