@@ -1,5 +1,4 @@
-**If you have any questions regarding the code/data, please contact Yufan Liu via andyalbert97@gmail.com. 
-**
+**If you have any questions regarding the code/data, please contact Yufan Liu via andyalbert97@gmail.com.**
 
 # Repo for CLAPE framework
 
