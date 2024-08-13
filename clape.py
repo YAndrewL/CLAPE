@@ -73,7 +73,6 @@ if len(seq_ids) != len(seqs):
 print("=====Loading pre-trained protein language model=====")
 tokenizer = BertTokenizer.from_pretrained("Rostlab/prot_bert", do_lower_case=False, cache_dir=args.cache)
 pretrain_model = BertModel.from_pretrained("Rostlab/prot_bert", cache_dir=args.cache)
-print("Done!")
 
 
 def get_protein_features(seq):
@@ -89,7 +88,6 @@ features = []
 print("=====Generating protein sequence feature=====")
 for s in seqs:
     features.append(get_protein_features(s).unsqueeze(0))
-print("Done!")
 
 # load CNN model
 print("=====Loading classification model=====")
@@ -102,7 +100,6 @@ elif args.ligand == 'AB':
     predictor.load_state_dict(torch.load("./weights/AB.pth"))
 else:
     raise ValueError(args.ligand)
-print("Done!")
 
 # prediction process
 results = []
@@ -112,7 +109,6 @@ for f in features:
     out = predictor(f).squeeze(0).detach().numpy()[:, 1]
     score = ''.join([str(1) if x > args.threshold else str(0) for x in out])
     results.append(score)
-print("Done!")
 
 print(f"=====Writing result files into {args.output}=====")
 with open(args.output, 'w') as f:
