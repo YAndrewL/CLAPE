@@ -48,7 +48,7 @@ If you find our work helpful, please kindly cite the BibTex as following:
 ```
 
 ## Update
-The training code is released with CLAPE-SMB, please check [this repo](https://github.com/JueWangTHU/CLAPE-SMB) for reference.
+- [Mar. 2024] The training code is released with CLAPE-SMB, please check [this repo](https://github.com/JueWangTHU/CLAPE-SMB) for reference.
 
-Our paper is publised in Briefings in Bioinformatics, please check [the online version](https://academic.oup.com/bib/article/25/1/bbad488/7505238).
+- [Jan. 2024] Our paper is publised in Briefings in Bioinformatics, please check [the online version](https://academic.oup.com/bib/article/25/1/bbad488/7505238).
 
