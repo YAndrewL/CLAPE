@@ -53,7 +53,7 @@ def main():
     parse.add_argument('--input', '-i', help='Input protein sequences in FASTA format', required=True)
     parse.add_argument('--output', '-o', help='Output file path, default clape_result.txt',
                     default='clape_result.txt')
-    parse.add_argument('--model_path', '-p', help='Path for downloaded model parameters', required=True)
+    parse.add_argument('--model', '-p', help='Path for downloaded model parameters', required=True)
     parse.add_argument('--cache', '-c', help='Path for saving cached pre-trained model', default='protbert')
 
     args = parse.parse_args()
@@ -96,7 +96,7 @@ def main():
     # load CNN model
     print("=====3. Loading classification model=====")
     predictor = CNNOD()
-    model_path = os.path.join(args.model_path, args.ligand + ".pth")
+    model_path = os.path.join(args.model, args.ligand + ".pth")
     print(f"Model loaded from {model_path}")
     predictor.load_state_dict(torch.load(model_path))
 
