@@ -1,11 +1,11 @@
 from setuptools import setup, find_packages
 
 setup(
-    name="clape",  
-    version="0.1.1",  
-    author="Andrew Liu",
+    name="Clape",  
+    version="1.0.0",  
+    author="Yufan Andrew Liu",
     author_email="andyalbert97@gmail.com",
-    description="clape",
+    description="CLAPE (Contrastive Learning And Pre-trained Encoder) for protein-ligand binding sites prediction",
     long_description=open("README.md").read(),
     long_description_content_type="text/markdown",
     url="https://github.com/YAndrewL/CLAPE",

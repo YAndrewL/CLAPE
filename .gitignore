@@ -1,2 +1,5 @@
 protbert/
 *.txt
+build/
+Clape.egg-info/
+dist/

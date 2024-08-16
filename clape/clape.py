@@ -20,9 +20,10 @@ from .model import CNNOD
 class Clape(object):
     def __init__(self, 
                  model_path,
+                 ligand,
                  threshold:float=0.5,
                  pretrained_cache:str="protbert",
-                 ligand=None):
+                 ):
         
         self._sanity_check(threshold, ligand)
         self.threshold = threshold
@@ -91,6 +92,3 @@ class Clape(object):
     def switch_ligand(self, ligand):
         self.ligand = ligand
         self.model = self._load_model(ligand)
-        
-    def visualization(self, result):
-        ...

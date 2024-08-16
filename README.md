@@ -1,17 +1,47 @@
 **If you have any questions regarding the code/data, please contact Yufan Liu via andyalbert97@gmail.com.**
 
-# Repo for CLAPE framework
+# CLAPE framework
 
-This repo holds the code of CLAPE (Contrastive Learning And Pre-trained Encoder) framework for protein-ligands binding sites prediction. We provide 3 ligand-binding tasks including protein-DNA, protein-RNA, and antibody-antigen binding sites prediction. 
+This repo holds the code of CLAPE (Contrastive Learning And Pre-trained Encoder) framework for protein-ligands binding sites prediction. We provide 3 ligand-binding tasks including protein-DNA, protein-RNA, and antibody-antigen binding sites prediction, an we will also provide small molecules binding sites weight in the future (check [CLAPE-SMB](https://github.com/JueWangTHU/CLAPE-SMB) for reference).
 
-CLAPE is primarily dependent on a large-scale pre-trained protein language model [ProtBert](https://huggingface.co/Rostlab/prot_bert)  implemented using [HuggingFace's Transformers](https://huggingface.co/) and [PyTorch](https://pytorch.org/). Please install the dependencies in advance. 
 
 ## Usage
 
-We provide the Python script for predicting ligand-binding sites of given protein sequences in FASTA format. Here we provide a sample file, and please use CLAPE as following commands:
+CLAPE is primarily dependent on a large-scale pre-trained protein language model [ProtBert](https://huggingface.co/Rostlab/prot_bert)  implemented using [HuggingFace's Transformers](https://huggingface.co/) and [PyTorch](https://pytorch.org/). Please install the dependencies in advance, or create a conda/mamba envrionment using provided environment file. If you are using CLAPE-SMB, please install [ESM](https://github.com/facebookresearch/esm).
 
+```shell
+wget https://github.com/YAndrewL/CLAPE/blob/main/environment.yaml
+conda env create -f environment.yaml
+conda activate clape 
 ```
-python clape.py --input example.fa --output out.txt
+### 1. Python package from pypi
+We provide a python package for predicting ligand-binding sites of given protein sequences in FASTA format. Here we provide a sample file, and please use CLAPE as following steps, taking DNA-binding sites prediction as an example:
+
+```shell 
+# download model weights and example file
+wget https://github.com/YAndrewL/CLAPE/blob/main/example.fa
+wget https://github.com/YAndrewL/CLAPE/blob/main/weights/DNA.pth
+```
+
+```python
+pip install clape  # install clape from pypi
+```
+
+```python
+# package usage example
+from clape import Clape
+
+model = Clape(model_path="model_path", ligand="DNA")
+results = model.predict(input_file="example.fa")
+```
+You can set `keep_score` to `True` to keep the predicted score from model, and use `switch_ligand` to change to another binding site prediction task.
+
+
+### 2. Command line tools
+We also provide a command line tool, which will be installed along the python package, you may use as below:
+
+```shell
+clape --input example.fa --output out.txt --lignd DNA --model /path/to/downloaded/model
 ```
 
 This command will first load the pre-trained models, users can specify the downloading directory using the `--cache` parameter.
@@ -49,7 +79,8 @@ If you find our work helpful, please kindly cite the BibTex as following:
 ```
 
 ## Update
+- [Aug. 2024] CLAPE can be used as a python package now, please check [clape in pypi](https://pypi.org/project/clape/).
+
 - [Mar. 2024] The training code is released with CLAPE-SMB, please check [this repo](https://github.com/JueWangTHU/CLAPE-SMB) for reference.
 
 - [Jan. 2024] Our paper is publised in Briefings in Bioinformatics, please check [the online version](https://academic.oup.com/bib/article/25/1/bbad488/7505238).
-
