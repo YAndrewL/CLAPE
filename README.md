@@ -27,6 +27,7 @@ Some parameters are described as follows:
 | --output    | The path of the output file, the first and the second line are the same as the input file, and the third line is the prediction result. |
 | --cache     | The path for saving the pre-trained parameters, default: protbert. |
 
+
 ## Citation
 If you find our work helpful, please kindly cite the BibTex as following:
 ```
