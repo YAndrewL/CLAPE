@@ -21,9 +21,6 @@ We provide a python package for predicting ligand-binding sites of given protein
 # download model weights and example file
 wget https://github.com/YAndrewL/CLAPE/blob/main/example.fa
 wget https://github.com/YAndrewL/CLAPE/blob/main/weights/DNA.pth
-```
-
-```python
 pip install clape  # install clape from pypi
 ```
 
