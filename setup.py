@@ -1,8 +1,8 @@
 from setuptools import setup, find_packages
 
 setup(
-    name="Clape",  
-    version="1.0.0",  
+    name="clape",  
+    version="0.0.2",  
     author="Yufan Andrew Liu",
     author_email="andyalbert97@gmail.com",
     description="CLAPE (Contrastive Learning And Pre-trained Encoder) for protein-ligand binding sites prediction",
@@ -16,6 +16,10 @@ setup(
         "Operating System :: OS Independent",
     ],
     python_requires='>=3.8',
+    install_requires=[
+        "numpy",
+        "requests"
+    ],
     entry_points={
         'console_scripts':[
             'clape=clape.clape_cli:main'

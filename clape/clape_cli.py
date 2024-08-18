@@ -14,6 +14,7 @@ import torch.nn as nn
 from transformers import BertModel, BertTokenizer
 
 from .model import CNNOD
+from Bio import SeqIO
 
 warnings.filterwarnings('ignore')
 
@@ -35,14 +36,12 @@ def main():
         raise ValueError("Threshold is out of range.")
 
     # input sequences
-    input_file = open(args.input, 'r').readlines()
     seq_ids = []
     seqs = []
-    for line in input_file:
-        if line.startswith('>'):
-            seq_ids.append(line.strip())
-        else:
-            seqs.append(line.strip())
+    input_file = SeqIO.parse(args.input, 'fasta')
+    for seq in input_file:
+        seq_ids.append(seq.id)
+        seqs.append(seq.seq)
     if len(seq_ids) != len(seqs):
         raise ValueError("FASTA file is not valid.")
 

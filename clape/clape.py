@@ -15,6 +15,7 @@ import torch.nn as nn
 from transformers import BertModel, BertTokenizer
 
 from .model import CNNOD
+from Bio import SeqIO, PDB
 
 
 class Clape(object):
@@ -56,17 +57,13 @@ class Clape(object):
         return model
                     
     def _process_seq(self, input_file:str):
-        assert input_file.split(".")[-1] in ['fasta', 'fa'], "Please assure suffix is .fasta or .fa"
-        fasta = open(input_file, 'r').readlines()
+        assert input_file.split(".")[-1] in ['fasta', 'fa'], "Please ensure suffix is .fasta or .fa"
+        sequences = SeqIO.parse(input_file, "fasta")
         seq_ids = []
         seqs = []
-        for line in fasta:
-            if line.startswith('>'):
-                seq_ids.append(line.strip())
-            else:
-                seqs.append(line.strip())
-        if len(seq_ids) != len(seqs):
-            raise ValueError("FASTA file is not valid.") 
+        for seq in sequences:
+            seq_ids.append(seq.id)
+            seqs.append(seq.seq)
         return seqs             
     
     def predict(self, input_file:str, keep_score=False):
@@ -87,7 +84,14 @@ class Clape(object):
         if keep_score:
             return score, results   
         else:
-            return results   
+            return results  
+        
+    def predict_from_pdb(self, pdb_file, pdb_id):
+        """
+        Predict and visulize from pdb
+        """        
+        
+        pass 
     
     def switch_ligand(self, ligand):
         self.ligand = ligand
