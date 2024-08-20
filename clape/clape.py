@@ -12,10 +12,11 @@ import re
 
 import torch
 import torch.nn as nn
+from Bio import SeqIO
+from Bio.PDB import PDBList
 from transformers import BertModel, BertTokenizer
 
 from .model import CNNOD
-from Bio import SeqIO, PDB
 
 
 class Clape(object):
@@ -76,23 +77,49 @@ class Clape(object):
         print(f"=====Predicting {self.ligand}-binding sites=====")
         self.model.eval()
         for f in features:
+
             score = self.model(f).squeeze(0).detach().numpy()[:, 1]
             out = ''.join([str(1) if x > self.threshold else str(0) for x in score])
             results.append(out) 
-        print("=========Finished!=========")
         
         if keep_score:
             return score, results   
         else:
             return results  
         
-    def predict_from_pdb(self, pdb_file, pdb_id):
-        """
-        Predict and visulize from pdb
-        """        
+    def predict_from_pdb(self, pdb_file, chain, 
+                         pdb_id, pdb_cache=".",
+                         keep_score=False,
+                         visualize=False):  
+        if pdb_id:
+           pdbl = PDBList()
+           try:
+               pdbl.retrieve_pdb_file(pdb_id, file_format="pdb", pdir=pdb_cache, overwrite=True)
+               file = osp.join(pdb_cache, pdb_id + ".pdb")
+           except Exception as e:
+               print(e)
+        else:
+            file = pdb_file
+        seqs = SeqIO.parse(file, "pdb-atom")
+        chain_id = None
+        for seq in seqs:
+            if seq.id == chain:
+                s = seq
+                chain_id = seq.id
+        if not chain_id:
+            raise KeyError(f"{chain} is not a valid protein chain in {osp.split(pdb_file)[-1]}")
+
+        print(f"=====Predicting {self.ligand}-binding sites=====")
+        self.model.eval()
+        feature = self._seq_embedding(s).unsqueeze(0)
+        score = self.model(feature).squeeze(0).detach().numpy()[:, 1]
+        out = ''.join([str(1) if x > self.threshold else str(0) for x in score])
         
-        pass 
-    
+        if keep_score:
+            return score, out
+        else:
+            return out
+         
     def switch_ligand(self, ligand):
         self.ligand = ligand
         self.model = self._load_model(ligand)

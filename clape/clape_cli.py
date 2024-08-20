@@ -11,10 +11,10 @@ import warnings
 
 import torch
 import torch.nn as nn
+from Bio import SeqIO
 from transformers import BertModel, BertTokenizer
 
 from .model import CNNOD
-from Bio import SeqIO
 
 warnings.filterwarnings('ignore')
 
