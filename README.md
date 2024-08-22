@@ -38,7 +38,7 @@ You can set `keep_score` to `True` to keep the predicted score from model, and u
 We also provide a command line tool, which will be installed along the python package, you may use as below:
 
 ```shell
-clape --input example.fa --output out.txt --lignd DNA --model /path/to/downloaded/model
+clape --input example.fa --output out.txt --ligand DNA --model /path/to/downloaded/model
 ```
 
 This command will first load the pre-trained models, users can specify the downloading directory using the `--cache` parameter.

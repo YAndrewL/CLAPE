@@ -10,7 +10,7 @@ from pymol import cmd
 show_as_doable = ['cartoon', 'surface', 'sticks', 'mesh']
 color_doable = ['red', 'blue','green', 'magenta']
 
-
+# todo add score visulization
 def visualize(pdb_file, 
               chain:str, 
               result:list, 

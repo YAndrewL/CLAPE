@@ -64,7 +64,7 @@ class Clape(object):
         seqs = []
         for seq in sequences:
             seq_ids.append(seq.id)
-            seqs.append(seq.seq)
+            seqs.append(str(seq.seq))
         return seqs             
     
     def predict(self, input_file:str, keep_score=False):

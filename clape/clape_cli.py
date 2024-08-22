@@ -41,7 +41,8 @@ def main():
     input_file = SeqIO.parse(args.input, 'fasta')
     for seq in input_file:
         seq_ids.append(seq.id)
-        seqs.append(seq.seq)
+        seqs.append(str(seq.seq))
+    print(seqs)
     if len(seq_ids) != len(seqs):
         raise ValueError("FASTA file is not valid.")
 
