@@ -97,14 +97,19 @@ class Clape(object):
                          keep_score=False,
                          visualize=False):  
         if pdb_id:
-           pdbl = PDBList()
-           try:
-               pdbl.retrieve_pdb_file(pdb_id, file_format="pdb", pdir=pdb_cache, overwrite=True)
-               raw_file = osp.join(pdb_cache, "pdb" + pdb_id.lower() + ".ent")
-               file = osp.join(pdb_cache, pdb_id.lower() + ".pdb")
-               os.rename(raw_file, file)
-           except Exception as e:
-               print(e)
+            pdb_position = osp.join(pdb_cache, pdb_id.lower() + ".pdb")
+            if not osp.exists(pdb_position):
+                pdbl = PDBList()
+
+                try:
+                    pdbl.retrieve_pdb_file(pdb_id, file_format="pdb", pdir=pdb_cache, overwrite=True)
+                    raw_file = osp.join(pdb_cache, "pdb" + pdb_id.lower() + ".ent")
+                    file = osp.join(pdb_cache, pdb_id.lower() + ".pdb")
+                    os.rename(raw_file, file)
+                except Exception as e:
+                    print(e)
+            else:
+                file = pdb_position
         else:
             file = pdb_file
         seqs = SeqIO.parse(file, "pdb-atom")

@@ -13,6 +13,16 @@ color_doable = ['red', 'blue','green', 'magenta']
 def all_integers(lst):
     return all(isinstance(i, int) for i in lst)
 
+def remove_dup(lst):
+    unique_list = []
+    seen = set()
+
+    for item in lst:
+        if item not in seen:
+            unique_list.append(item)
+            seen.add(item)
+    return unique_list
+
 def visualize(pdb_file, 
               chain:str, 
               result:list, 
@@ -28,21 +38,30 @@ def visualize(pdb_file,
     assert show_as in show_as_doable, f"Viable show modes: {show_as_doable}"
     assert color in color_doable, f"Viable colors: {color_doable}"
     
+    cmd.reinitialize()
     cmd.load(pdb_file.lower(), 'pdb_file')
+    cmd.remove("solvent")
     cmd.show(show_as, f'chain {chain}')
     cmd.color('gray90', f'chain {chain}')
     
     residue_list = result
     all_chains = cmd.get_chains('pdb_file')
     
+    # obtain all residues names/numbers
+    selection = f"chain {chain}"
+    model = cmd.get_model(selection)
+    residue_numbers = [atom.resi for atom in model.atom]
+    residue_numbers = remove_dup(residue_numbers)
+
     if all_integers(residue_list):
+        residue_list = [x for x in range(1, len(residue_list) + 1) if residue_list[x-1] != 0]
         for resi in residue_list:
             selection = f'chain {chain} and resi {resi}'
             cmd.color(color, selection)
     else:
         # color by b-facotr
-        for i, resi in enumerate(range(1, len(residue_list) + 1)):
-            cmd.alter(f"resi {resi}", f"b={residue_list[i]}")
+        for i in range(len(residue_list)):
+            cmd.alter(f"resi {residue_numbers[i]}", f"b={residue_list[i]}")
             cmd.spectrum("b", "blue_red", selection=f"chain {chain}")
 
     if select_only and ligand_id:
@@ -53,7 +72,6 @@ def visualize(pdb_file,
         remove = [x for x in all_chains if x not in chain]
         selection = cmd.remove(f'chain {"+".join(remove)} and pdb_file')
         cmd.save(out_file)
-        cmd.quit()
         return
     elif ligand_id:
         try:
@@ -62,13 +80,9 @@ def visualize(pdb_file,
             remove = [x for x in all_chains if x not in ligand_id]
             selection = cmd.remove(f'chain {"+".join(remove)} and pdb_file')
             cmd.save(out_file)
-            cmd.quit()
         except Exception as e:
             print(e, "Make sure input id looks like: A,B,C, split with comma")
         return
     else:
         cmd.save(out_file)
-        cmd.quit()
         return 
-    
-    
