@@ -7,6 +7,7 @@
 '''
 
 
+import os
 import os.path as osp
 import re
 
@@ -17,6 +18,7 @@ from Bio.PDB import PDBList
 from transformers import BertModel, BertTokenizer
 
 from .model import CNNOD
+from .vis import visualize as vis_tool
 
 
 class Clape(object):
@@ -87,15 +89,20 @@ class Clape(object):
         else:
             return results  
         
-    def predict_from_pdb(self, pdb_file, chain, 
-                         pdb_id, pdb_cache=".",
+    def predict_from_pdb(self, 
+                         chain, 
+                         pdb_file=None,
+                         pdb_id=None, 
+                         pdb_cache=".",
                          keep_score=False,
                          visualize=False):  
         if pdb_id:
            pdbl = PDBList()
            try:
                pdbl.retrieve_pdb_file(pdb_id, file_format="pdb", pdir=pdb_cache, overwrite=True)
-               file = osp.join(pdb_cache, pdb_id + ".pdb")
+               raw_file = osp.join(pdb_cache, "pdb" + pdb_id.lower() + ".ent")
+               file = osp.join(pdb_cache, pdb_id.lower() + ".pdb")
+               os.rename(raw_file, file)
            except Exception as e:
                print(e)
         else:
@@ -103,17 +110,23 @@ class Clape(object):
         seqs = SeqIO.parse(file, "pdb-atom")
         chain_id = None
         for seq in seqs:
-            if seq.id == chain:
+            if seq.id[-1] == chain:
                 s = seq
                 chain_id = seq.id
         if not chain_id:
-            raise KeyError(f"{chain} is not a valid protein chain in {osp.split(pdb_file)[-1]}")
+            raise KeyError(f"{chain} is not a valid protein chain in {osp.split(file)[-1]}")
 
         print(f"=====Predicting {self.ligand}-binding sites=====")
         self.model.eval()
         feature = self._seq_embedding(s).unsqueeze(0)
         score = self.model(feature).squeeze(0).detach().numpy()[:, 1]
         out = ''.join([str(1) if x > self.threshold else str(0) for x in score])
+        
+        if visualize:
+            try: 
+                vis_tool(pdb_file=pdb_file, chain=chain, result=out, out_file="out.pse")
+            except:
+                raise RuntimeError("Trying to visualize with an invalid structure input.")
         
         if keep_score:
             return score, out

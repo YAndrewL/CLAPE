@@ -10,7 +10,9 @@ from pymol import cmd
 show_as_doable = ['cartoon', 'surface', 'sticks', 'mesh']
 color_doable = ['red', 'blue','green', 'magenta']
 
-# todo add score visulization
+def all_integers(lst):
+    return all(isinstance(i, int) for i in lst)
+
 def visualize(pdb_file, 
               chain:str, 
               result:list, 
@@ -26,16 +28,22 @@ def visualize(pdb_file,
     assert show_as in show_as_doable, f"Viable show modes: {show_as_doable}"
     assert color in color_doable, f"Viable colors: {color_doable}"
     
-    cmd.load(pdb_file, 'pdb_file')
+    cmd.load(pdb_file.lower(), 'pdb_file')
     cmd.show(show_as, f'chain {chain}')
     cmd.color('gray90', f'chain {chain}')
     
     residue_list = result
     all_chains = cmd.get_chains('pdb_file')
     
-    for resi in residue_list:
-        selection = f'chain {chain} and resi {resi}'
-        cmd.color(color, selection)
+    if all_integers(residue_list):
+        for resi in residue_list:
+            selection = f'chain {chain} and resi {resi}'
+            cmd.color(color, selection)
+    else:
+        # color by b-facotr
+        for i, resi in enumerate(range(1, len(residue_list) + 1)):
+            cmd.alter(f"resi {resi}", f"b={residue_list[i]}")
+            cmd.spectrum("b", "blue_red", selection=f"chain {chain}")
 
     if select_only and ligand_id:
         raise RuntimeError(f"set select_only to False if you want to save ligand")

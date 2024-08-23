@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="clape",  
-    version="0.0.2",  
+    version="0.0.3",  
     author="Yufan Andrew Liu",
     author_email="andyalbert97@gmail.com",
     description="CLAPE (Contrastive Learning And Pre-trained Encoder) for protein-ligand binding sites prediction",

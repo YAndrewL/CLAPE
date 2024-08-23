@@ -85,7 +85,7 @@ def main():
     print(f"=====5. Writing result files into {args.output}=====")
     with open(args.output, 'w') as f:
         for i in range(len(seq_ids)):
-            f.write(seq_ids[i] + '\n')
+            f.write('>'+seq_ids[i] + '\n')
             f.write(seqs[i] + '\n')
             f.write(results[i] + '\n')
     print(f"Congrats! All process done! Your result file is saved as {args.output}")
