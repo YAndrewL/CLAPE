@@ -1,4 +1,4 @@
-<img width="864" alt="image" src="https://github.com/user-attachments/assets/6e930d2f-107f-4969-ad38-6a56aaba3b96">**If you have any questions regarding the code/data, please contact Yufan Liu via andyalbert97@gmail.com.**
+**If you have any questions regarding the code/data, please contact Yufan Liu via andyalbert97@gmail.com.**
 
 # CLAPE framework
 
