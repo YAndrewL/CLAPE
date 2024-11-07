@@ -1,4 +1,4 @@
-**If you have any questions regarding the code/data, please contact Yufan Liu via andyalbert97@gmail.com.**
+<img width="864" alt="image" src="https://github.com/user-attachments/assets/6e930d2f-107f-4969-ad38-6a56aaba3b96">**If you have any questions regarding the code/data, please contact Yufan Liu via andyalbert97@gmail.com.**
 
 # CLAPE framework
 
@@ -76,6 +76,8 @@ If you find our work helpful, please kindly cite the BibTex as following:
 ```
 
 ## Update
+- [Nov. 2024] CLAPE-SMB is publised in Journal of Cheminformatics, please check [the online version]([https://academic.oup.com/bib/article/25/1/bbad488/7505238](https://jcheminf.biomedcentral.com/articles/10.1186/s13321-024-00920-2)).
+
 - [Aug. 2024] CLAPE can be used as a python package now, please check [clape in pypi](https://pypi.org/project/clape/).
 
 - [Mar. 2024] The training code is released with CLAPE-SMB, please check [this repo](https://github.com/JueWangTHU/CLAPE-SMB) for reference.
