@@ -76,7 +76,7 @@ If you find our work helpful, please kindly cite the BibTex as following:
 ```
 
 ## Update
-- [Nov. 2024] CLAPE-SMB is publised in Journal of Cheminformatics, please check [the online version]([https://academic.oup.com/bib/article/25/1/bbad488/7505238](https://jcheminf.biomedcentral.com/articles/10.1186/s13321-024-00920-2)).
+- [Nov. 2024] CLAPE-SMB is publised in Journal of Cheminformatics, please check [the online version](https://jcheminf.biomedcentral.com/articles/10.1186/s13321-024-00920-2).
 
 - [Aug. 2024] CLAPE can be used as a python package now, please check [clape in pypi](https://pypi.org/project/clape/).
 
