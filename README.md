@@ -67,13 +67,34 @@ If you find our work helpful, please kindly cite the BibTex as following:
     pages = {bbad488},
     year = {2024},
     month = {01},
-    abstract = "{Protein–DNA interaction is critical for life activities such as replication, transcription and splicing. Identifying protein–DNA binding residues is essential for modeling their interaction and downstream studies. However, developing accurate and efficient computational methods for this task remains challenging. Improvements in this area have the potential to drive novel applications in biotechnology and drug design. In this study, we propose a novel approach called Contrastive Learning And Pre-trained Encoder (CLAPE), which combines a pre-trained protein language model and the contrastive learning method to predict DNA binding residues. We trained the CLAPE-DB model on the protein–DNA binding sites dataset and evaluated the model performance and generalization ability through various experiments. The results showed that the area under ROC curve values of the CLAPE-DB model on the two benchmark datasets reached 0.871 and 0.881, respectively, indicating superior performance compared to other existing models. CLAPE-DB showed better generalization ability and was specific to DNA-binding sites. In addition, we trained CLAPE on different protein–ligand binding sites datasets, demonstrating that CLAPE is a general framework for binding sites prediction. To facilitate the scientific community, the benchmark datasets and codes are freely available at https://github.com/YAndrewL/clape.}",
     issn = {1477-4054},
     doi = {10.1093/bib/bbad488},
     url = {https://doi.org/10.1093/bib/bbad488},
     eprint = {https://academic.oup.com/bib/article-pdf/25/1/bbad488/55381199/bbad488.pdf},
 }
 ```
+If you are using CLAPE-SMB, please also kindly cite: 
+```
+@article{10.1186/s13321-024-00920-2,
+    author={Wang, Jue
+    and Liu, Yufan
+    and Tian, Boxue},
+    title={Protein-small molecule binding site prediction based on a pre-trained protein language model with contrastive learning},
+    journal={Journal of Cheminformatics},
+    year={2024},
+    month={Nov},
+    day={06},
+    volume={16},
+    number={1},
+    pages={125},
+    issn={1758-2946},
+    doi={10.1186/s13321-024-00920-2},
+    url={https://doi.org/10.1186/s13321-024-00920-2}
+}
+
+```
+
+
 
 ## Update
 - [Nov. 2024] CLAPE-SMB is publised in Journal of Cheminformatics, please check [the online version](https://jcheminf.biomedcentral.com/articles/10.1186/s13321-024-00920-2).
