@@ -18,7 +18,6 @@ from Bio.PDB import PDBList
 from transformers import BertModel, BertTokenizer
 
 from .model import CNNOD
-from .vis import visualize as vis_tool
 
 
 class Clape(object):
@@ -129,6 +128,7 @@ class Clape(object):
         
         if visualize:
             try: 
+                from .vis import visualize as vis_tool
                 vis_tool(pdb_file=pdb_file, chain=chain, result=out, out_file="out.pse")
             except:
                 raise RuntimeError("Trying to visualize with an invalid structure input.")
